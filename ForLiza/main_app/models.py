@@ -1,14 +1,13 @@
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 
-# Create your models here.
-class Travel(object):
-    def __init__(self, name, destination, stops):
-        self.name = name
-        self.destination = destination
-        self.stops = stops
+class Travel(models.Model):
+    name = models.CharField(max_length=100)
+    destination = models.CharField(max_length=100)
+    stops = ArrayField(
+        models.CharField(max_length=100),
+        size=8)
 
-
-travels = [
-    Travel('sweden', 'sweden', ['israel', 'ukrain', ' sweden'])
-]
+    def __str__(self):
+        return self.name
